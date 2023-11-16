@@ -81,4 +81,5 @@ dependencies {
 
     /*依赖子模块*/
     implementation project(path: ':lib')
+    implementation project(path: ':plugin-lib')
 }

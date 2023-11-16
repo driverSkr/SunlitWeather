@@ -10,8 +10,9 @@ import com.baidu.location.BDLocation
 import com.driverskr.sunlitweather.databinding.ActivityHomeBinding
 import com.driverskr.sunlitweather.location.LocationCallback
 import com.driverskr.sunlitweather.location.SunlitLocation
+import com.driverskr.sunlitweather.ui.base.BaseVmActivity
 
-class HomeActivity : AppCompatActivity(), LocationCallback {
+class HomeActivity : BaseVmActivity<ActivityHomeBinding, >(), LocationCallback {
 
     lateinit var binding: ActivityHomeBinding
 
