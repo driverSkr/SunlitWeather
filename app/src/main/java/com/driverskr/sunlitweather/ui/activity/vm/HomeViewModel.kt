@@ -33,19 +33,5 @@ class HomeViewModel(val app: Application): BaseViewModel(app) {
         }
     }
 
-    fun checkVersion() {
-        launchSilent {
-            val url = ContentUtil.BASE_URL + "api/check_version2"
-            val param = HashMap<String, Any>()
-//            param["app_code"] = CommonUtil.getVersionCode(app)
-            param["key"] = BuildConfig.HeFengKey
-            param["build_type"] = BuildConfig.BUILD_TYPE
 
-            val result = HttpUtils.post<VersionBean>(url, param)
-
-            result?.let {
-                newVersion.postValue(it)
-            }
-        }
-    }
 }

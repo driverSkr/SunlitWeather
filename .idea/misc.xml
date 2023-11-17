@@ -12,14 +12,31 @@
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/drawable/ic_she.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/drawable/ic_theme.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/drawable/shape_rect_r8_tcc_white.xml" value="0.1" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/drawable/side_nav_bar.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_about.xml" value="0.2046875" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_base.xml" value="0.2" />
-        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_home.xml" value="0.22447916666666667" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_location_test.xml" value="0.225" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/nav_header_main.xml" value="0.264" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/xml/shortcuts.xml" value="0.14175724637681159" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_0_n.xml" value="0.1" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_1_n.xml" value="0.1" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_2_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_3_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_4_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_5_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_7_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_8_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/bg_9_n.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/shape_blue_alarm.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/shape_orange_alarm.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/shape_red_alarm.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/shape_white_alarm.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/drawable/shape_yellow_alarm.xml" value="0.2195" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/layout/custom_toast.xml" value="0.2" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/lib/src/main/res/layout/dialog_loading.xml" value="0.536" />
       </map>
     </option>

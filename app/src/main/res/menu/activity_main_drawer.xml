@@ -22,7 +22,7 @@
                     android:icon="@drawable/ic_she"
                     android:title="@string/she"/>
                 <item
-                    android:id="@+id/nvaHua"
+                    android:id="@+id/navHua"
                     android:icon="@drawable/ic_hua"
                     android:title="@string/hua"/>
             </group>
