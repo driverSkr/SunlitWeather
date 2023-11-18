@@ -1,10 +1,11 @@
-package com.driverskr.sunlitweather.db
+package com.driverskr.sunlitweather.logic
 
 import BaseApplication
-import com.driverskr.sunlitweather.db.dao.CacheDao
-import com.driverskr.sunlitweather.db.dao.CityDao
-import com.driverskr.sunlitweather.db.entity.CacheEntity
-import com.driverskr.sunlitweather.db.entity.CityEntity
+import com.driverskr.sunlitweather.logic.db.AppDatabase
+import com.driverskr.sunlitweather.logic.db.dao.CacheDao
+import com.driverskr.sunlitweather.logic.db.dao.CityDao
+import com.driverskr.sunlitweather.logic.db.entity.CacheEntity
+import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.ObjectInputStream

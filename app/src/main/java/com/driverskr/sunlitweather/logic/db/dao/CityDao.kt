@@ -1,10 +1,10 @@
-package com.driverskr.sunlitweather.db.dao
+package com.driverskr.sunlitweather.logic.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.driverskr.sunlitweather.db.entity.CityEntity
+import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 
 /**
  * @Author: driverSkr

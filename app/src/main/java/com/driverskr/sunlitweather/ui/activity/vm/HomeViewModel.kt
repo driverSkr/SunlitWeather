@@ -2,12 +2,10 @@ package com.driverskr.sunlitweather.ui.activity.vm
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.driverskr.sunlitweather.BuildConfig
 import com.driverskr.sunlitweather.bean.VersionBean
-import com.driverskr.sunlitweather.db.AppRepository
-import com.driverskr.sunlitweather.db.entity.CityEntity
+import com.driverskr.sunlitweather.logic.AppRepository
+import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import com.driverskr.sunlitweather.ui.base.BaseViewModel
-import com.driverskr.sunlitweather.utils.ContentUtil
 
 /**
  * @Author: driverSkr

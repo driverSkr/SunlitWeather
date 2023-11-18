@@ -1,4 +1,4 @@
-package com.driverskr.sunlitweather.db
+package com.driverskr.sunlitweather.logic.db
 
 import android.content.Context
 import android.util.Log
@@ -7,10 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.driverskr.sunlitweather.db.dao.CacheDao
-import com.driverskr.sunlitweather.db.dao.CityDao
-import com.driverskr.sunlitweather.db.entity.CacheEntity
-import com.driverskr.sunlitweather.db.entity.CityEntity
+import com.driverskr.sunlitweather.logic.db.dao.CacheDao
+import com.driverskr.sunlitweather.logic.db.dao.CityDao
+import com.driverskr.sunlitweather.logic.db.entity.CacheEntity
+import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 
 /**
  * @Author: driverSkr
@@ -37,7 +37,7 @@ internal abstract class AppDatabase: RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context,AppDatabase::class.java, DATABASE_NAME)
+            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .allowMainThreadQueries()
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {

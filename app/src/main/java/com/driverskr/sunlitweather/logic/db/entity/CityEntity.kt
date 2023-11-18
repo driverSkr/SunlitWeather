@@ -1,4 +1,4 @@
-package com.driverskr.sunlitweather.db.entity
+package com.driverskr.sunlitweather.logic.db.entity
 
 import androidx.annotation.NonNull
 import androidx.room.Entity

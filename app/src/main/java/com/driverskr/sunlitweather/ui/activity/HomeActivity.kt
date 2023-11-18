@@ -3,8 +3,8 @@ package com.driverskr.sunlitweather.ui.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Animatable
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -13,23 +13,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.baidu.location.BDLocation
 import com.driverskr.lib.extension.expand
 import com.driverskr.lib.utils.IconUtils
-import com.driverskr.lib.utils.SpUtil
 import com.driverskr.sunlitweather.R
 import com.driverskr.sunlitweather.adapter.ViewPagerAdapter
 import com.driverskr.sunlitweather.bean.TempUnit
 import com.driverskr.sunlitweather.databinding.ActivityHomeBinding
 import com.driverskr.sunlitweather.databinding.NavHeaderMainBinding
-import com.driverskr.sunlitweather.db.entity.CityEntity
 import com.driverskr.sunlitweather.location.LocationCallback
 import com.driverskr.sunlitweather.location.SunlitLocation
+import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import com.driverskr.sunlitweather.ui.activity.vm.HomeViewModel
 import com.driverskr.sunlitweather.ui.base.BaseVmActivity
+import com.driverskr.sunlitweather.utils.ContentUtil
 
 class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), LocationCallback {
 
@@ -212,6 +211,31 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
      * 初始化数据
      */
     override fun initData() {
-        Log.d("boge","初始化数据")
+        viewModel.getCities()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (ContentUtil.CITY_CHANGE) {
+            viewModel.getCities()
+            ContentUtil.CITY_CHANGE = false
+        }
+        mBinding.ivEffect.drawable?.let {
+            (it as Animatable).start()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.END)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.ivEffect.drawable?.let {
+            (it as Animatable).stop()
+        }
     }
 }

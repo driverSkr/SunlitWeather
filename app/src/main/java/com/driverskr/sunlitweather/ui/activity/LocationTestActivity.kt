@@ -2,13 +2,11 @@ package com.driverskr.sunlitweather.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.baidu.location.BDLocation
-import com.driverskr.sunlitweather.R
-import com.driverskr.sunlitweather.databinding.ActivityHomeBinding
 import com.driverskr.sunlitweather.databinding.ActivityLocationTestBinding
 import com.driverskr.sunlitweather.location.LocationCallback
 import com.driverskr.sunlitweather.location.SunlitLocation

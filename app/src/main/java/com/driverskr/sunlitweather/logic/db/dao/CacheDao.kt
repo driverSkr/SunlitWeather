@@ -1,7 +1,7 @@
-package com.driverskr.sunlitweather.db.dao
+package com.driverskr.sunlitweather.logic.db.dao
 
 import androidx.room.*
-import com.driverskr.sunlitweather.db.entity.CacheEntity
+import com.driverskr.sunlitweather.logic.db.entity.CacheEntity
 
 /**
  * @Author: driverSkr
