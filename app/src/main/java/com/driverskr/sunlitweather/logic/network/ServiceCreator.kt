@@ -10,17 +10,29 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object ServiceCreator {
 
-    //和风天气搜索城市
-    const val SEARCH_URL = "https://geoapi.qweather.com"
-    //和风天气API
-    const val WEATHER_URL = "https://devapi.qweather.com"
+    //API访问地址
+    private var mBaseUrl: String? = null
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(SEARCH_URL)
+    private val retrofit = mBaseUrl?.let {
+        Retrofit.Builder()
+        .baseUrl(it)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+    }
 
-    fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
+    private fun <T> create(serviceClass: Class<T>): T? = retrofit?.create(serviceClass)
 
-    inline fun <reified T> create(): T = create(T::class.java)
+
+    fun <T : Any> createService(serviceClass: Class<T>, apiType: ApiType): T? {
+        getBaseUrl(apiType)
+        return create(serviceClass)
+    }
+
+    private fun getBaseUrl(apiType: ApiType) {
+        mBaseUrl = when (apiType) {
+            ApiType.SEARCH -> "https://geoapi.qweather.com"  //和风天气搜索城市
+            ApiType.WEATHER -> "https://devapi.qweather.com" //和风天气API
+            ApiType.BING -> "https://cn.bing.com"    //必应壁纸
+        }
+    }
 }
