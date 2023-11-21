@@ -1,6 +1,8 @@
 package com.driverskr.sunlitweather.logic
 
 import com.driverskr.sunlitweather.logic.network.SunlitNetwork
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * @Author: driverSkr
@@ -9,7 +11,10 @@ import com.driverskr.sunlitweather.logic.network.SunlitNetwork
  */
 class WeatherRepository private constructor(private val sunlitNetwork: SunlitNetwork){
 
-
+    suspend fun searchCity(location: String, mode: String) = withContext(Dispatchers.IO) {
+        val response = sunlitNetwork.fetchSearchCity(location, mode)
+        response
+    }
 
     companion object {
         @Volatile

@@ -1,6 +1,6 @@
 package com.driverskr.sunlitweather.logic
 
-import BaseApplication
+import com.driverskr.lib.BaseApplication
 import com.driverskr.sunlitweather.logic.db.AppDatabase
 import com.driverskr.sunlitweather.logic.db.dao.CacheDao
 import com.driverskr.sunlitweather.logic.db.dao.CityDao

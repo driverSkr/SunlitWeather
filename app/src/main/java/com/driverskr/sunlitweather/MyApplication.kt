@@ -1,6 +1,6 @@
 package com.driverskr.sunlitweather
 
-import android.app.Application
+import com.driverskr.lib.BaseApplication
 import com.baidu.location.LocationClient
 
 /**
@@ -8,7 +8,7 @@ import com.baidu.location.LocationClient
  * @Time: 2023/11/15 16:02
  * @Description: 我的application$
  */
-class MyApplication: Application(){
+class MyApplication: BaseApplication(){
 
     override fun onCreate() {
         super.onCreate()

@@ -12,5 +12,6 @@ class SunlitNetwork {
     var weatherService = ServiceCreator.createService(WeatherService::class.java,ApiType.SEARCH)
         private set
 
+    suspend fun fetchSearchCity(location: String,mode: String) = weatherService?.searchCity(location, mode)
 
 }

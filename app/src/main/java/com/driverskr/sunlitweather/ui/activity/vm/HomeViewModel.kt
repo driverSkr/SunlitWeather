@@ -2,10 +2,15 @@ package com.driverskr.sunlitweather.ui.activity.vm
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
+import com.driverskr.lib.net.HttpUtils
+import com.driverskr.sunlitweather.bean.TempUnit
 import com.driverskr.sunlitweather.bean.VersionBean
 import com.driverskr.sunlitweather.logic.AppRepository
 import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import com.driverskr.sunlitweather.ui.base.BaseViewModel
+import com.driverskr.sunlitweather.utils.Constant
+import com.driverskr.sunlitweather.utils.ContentUtil
 
 /**
  * @Author: driverSkr
@@ -28,6 +33,33 @@ class HomeViewModel(val app: Application): BaseViewModel(app) {
         launchSilent {
             val cities = AppRepository.getInstance().getCities()
             mCities.postValue(cities)
+        }
+    }
+
+    fun checkVersion() {
+        launchSilent {
+            val url = ContentUtil.BASE_URL + "api/check_version2"
+            val param = HashMap<String, Any>()
+//            param["app_code"] = CommonUtil.getVersionCode(app)
+            param["key"] = Constant.HEFENG_KEY
+            param["build_type"] = Constant.BAIDU_KEY
+
+            val result = HttpUtils.post<VersionBean>(url, param)
+
+            result?.let {
+                newVersion.postValue(it)
+            }
+        }
+    }
+
+
+    fun changeUnit(unit: TempUnit) {
+//        ContentUtil.UNIT_CHANGE = true
+        ContentUtil.APP_SETTING_UNIT = unit.tag
+
+        PreferenceManager.getDefaultSharedPreferences(app).edit().apply {
+            putString("unit", unit.tag)
+            apply()
         }
     }
 

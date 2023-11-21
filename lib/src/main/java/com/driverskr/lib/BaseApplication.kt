@@ -1,3 +1,5 @@
+package com.driverskr.lib
+
 import android.app.Application
 import android.content.Context
 import kotlin.properties.Delegates

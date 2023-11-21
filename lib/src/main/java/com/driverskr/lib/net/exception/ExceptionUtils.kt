@@ -11,11 +11,6 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.net.ssl.SSLHandshakeException
 
-/**
- * @Author: driverSkr
- * @Time: 2023/11/16 11:09
- * @Description: $
- */
 object ExceptionUtils {
     /**
      * 处理异常

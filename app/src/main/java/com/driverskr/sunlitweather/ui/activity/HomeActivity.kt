@@ -4,6 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.TransitionDrawable
+import android.location.LocationManager
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.LinearLayout
@@ -14,10 +17,13 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.baidu.location.BDLocation
+import com.driverskr.lib.EffectUtil
 import com.driverskr.lib.extension.expand
 import com.driverskr.lib.utils.IconUtils
+import com.driverskr.lib.utils.SpUtil
 import com.driverskr.sunlitweather.R
 import com.driverskr.sunlitweather.adapter.ViewPagerAdapter
 import com.driverskr.sunlitweather.bean.TempUnit
@@ -27,8 +33,12 @@ import com.driverskr.sunlitweather.location.LocationCallback
 import com.driverskr.sunlitweather.location.SunlitLocation
 import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import com.driverskr.sunlitweather.ui.activity.vm.HomeViewModel
+import com.driverskr.sunlitweather.ui.activity.vm.LoginViewModel
 import com.driverskr.sunlitweather.ui.base.BaseVmActivity
+import com.driverskr.sunlitweather.ui.fragment.WeatherFragment
 import com.driverskr.sunlitweather.utils.ContentUtil
+import com.driverskr.sunlitweather.utils.DisplayUtil
+import com.driverskr.sunlitweather.utils.TencentUtil
 
 class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), LocationCallback {
 
@@ -42,6 +52,7 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
     private val fragments: MutableList<Fragment> by lazy { ArrayList() }
     private val cityList = ArrayList<CityEntity>()
     private var mCurIndex = 0
+    //private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var navHeaderBinding: NavHeaderMainBinding
     /**
@@ -89,6 +100,11 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
         //开始定位
         startLocation();
     }
+
+    /**
+     * 当前的天气code
+     */
+    var currentCode = ""
 
     override fun bindView() = ActivityHomeBinding.inflate(layoutInflater)
 
@@ -205,6 +221,13 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
             true
         }
 
+        viewModel.mCurCondCode.observe(this, ::changeBg)
+
+    }
+
+    private fun changeUnit(unit: TempUnit) {
+        viewModel.changeUnit(unit)
+        (fragments[mCurIndex] as WeatherFragment).changeUnit()
     }
 
     /**
@@ -212,6 +235,52 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
      */
     override fun initData() {
         viewModel.getCities()
+    }
+
+    /**
+     * 显示城市
+     */
+    private fun showCity() {
+        if (mCurIndex > cityList.size - 1) {
+            mCurIndex = cityList.size - 1
+        }
+
+        mBinding.ivLoc.visibility =
+            if (cityList[mCurIndex].isLocal) View.VISIBLE else View.INVISIBLE
+        mBinding.tvLocation.text = cityList[mCurIndex].cityName
+
+        mBinding.llRound.removeAllViews()
+
+        // 宽高参数
+        val size = DisplayUtil.dp2px(4f)
+        val layoutParams = LinearLayout.LayoutParams(size, size)
+        // 设置间隔
+        layoutParams.rightMargin = 12
+
+        for (i in cityList.indices) {
+            // 创建底部指示器(小圆点)
+            val view = View(this@HomeActivity)
+            view.setBackgroundResource(R.drawable.background)
+            view.isEnabled = false
+
+            // 添加到LinearLayout
+            mBinding.llRound.addView(view, layoutParams)
+        }
+        // 小白点
+        mBinding.llRound.getChildAt(mCurIndex).isEnabled = true
+        mBinding.llRound.visibility = if (cityList.size <= 1) View.GONE else View.VISIBLE
+
+        fragments.clear()
+        for (city in cityList) {
+            val cityId = city.cityId
+//            LogUtil.i("cityId: " + cityId)
+            val weatherFragment = WeatherFragment.newInstance(cityId)
+            fragments.add(weatherFragment)
+        }
+
+//        mBinding.viewPager.adapter?.notifyDataSetChanged()
+        mBinding.viewPager.adapter = ViewPagerAdapter(supportFragmentManager, fragments)
+        mBinding.viewPager.currentItem = mCurIndex
     }
 
     override fun onResume() {
@@ -230,6 +299,32 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.END)) {
             mBinding.drawerLayout.closeDrawer(GravityCompat.END)
         }
+    }
+
+    private fun changeBg(condCode: String) {
+        if (currentCode == condCode) {
+            return
+        }
+        currentCode = condCode
+        // 获取背景
+        val bgDrawable = IconUtils.getBg(this@HomeActivity, condCode.toInt())
+
+        val originDrawable = mBinding.ivBg.drawable
+        val targetDrawable = resources.getDrawable(bgDrawable)
+        val transitionDrawable = TransitionDrawable(
+            arrayOf<Drawable>(
+                originDrawable,
+                targetDrawable
+            )
+        )
+
+        mBinding.ivBg.setImageDrawable(transitionDrawable)
+        transitionDrawable.isCrossFadeEnabled = true
+        transitionDrawable.startTransition(1000)
+
+        // 获取特效
+        val effectDrawable = EffectUtil.getEffect(context, condCode.toInt())
+        mBinding.ivEffect.setImageDrawable(effectDrawable)
     }
 
     override fun onDestroy() {

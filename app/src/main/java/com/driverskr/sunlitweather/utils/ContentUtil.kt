@@ -1,7 +1,7 @@
 package com.driverskr.sunlitweather.utils
 
-import BaseApplication.Companion.context
-import android.preference.PreferenceManager
+import com.driverskr.lib.BaseApplication.Companion.context
+import androidx.preference.PreferenceManager
 
 /**
  * @Author: driverSkr
