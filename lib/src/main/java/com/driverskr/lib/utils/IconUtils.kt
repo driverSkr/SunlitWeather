@@ -26,7 +26,7 @@ object IconUtils {
     }
 
     fun getIcon(context: Context, weatherCode: String, postFix: String): Drawable? {
-        val isPlugin = SpUtil.getThemeFlag() == 1
+        val isPlugin = SpUtil.getInstance(context).getThemeFlag() == 1
         val code = parseCode(weatherCode, postFix)
         val resName = "icon_$code"
         if (isPlugin) {

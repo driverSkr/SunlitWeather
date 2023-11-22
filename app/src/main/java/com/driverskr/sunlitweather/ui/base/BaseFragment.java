@@ -53,6 +53,18 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         }
     }
 
+    public void showLoading(boolean show) {
+        /*
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(mContext);
+        }
+        if (show) {
+            loadingDialog.show();
+        } else {
+            loadingDialog.dismiss();
+        }*/
+    }
+
     /**
      * [页面跳转]
      *

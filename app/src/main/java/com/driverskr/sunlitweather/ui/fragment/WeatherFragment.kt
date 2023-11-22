@@ -395,7 +395,7 @@ class WeatherFragment: BaseVmFragment<FragmentWeatherBinding, WeatherViewModel>(
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(param1: String?) =
             WeatherFragment().apply {
                 arguments = Bundle().apply {
                     putString(PARAM_CITY_ID, param1)

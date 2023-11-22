@@ -16,7 +16,7 @@ object PluginUtil {
 
     fun getPluginRes(context: Context, resName: String): Drawable? {
         return try {
-            val pluginPath = SpUtil.getPluginPath()
+            val pluginPath = SpUtil.getInstance(context).pluginPath
             val resourceWrapper = loadResource(context, pluginPath)
             val resId = resourceWrapper.resources
                 .getIdentifier(resName, "drawable", resourceWrapper.packageName)

@@ -1,5 +1,6 @@
 package com.driverskr.sunlitweather.logic
 
+import android.util.Log
 import com.driverskr.sunlitweather.logic.network.SunlitNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,6 +14,7 @@ class WeatherRepository private constructor(private val sunlitNetwork: SunlitNet
 
     suspend fun searchCity(location: String, mode: String) = withContext(Dispatchers.IO) {
         val response = sunlitNetwork.fetchSearchCity(location, mode)
+        Log.d("boge","WeatherRepository : ${response.toString()}")
         response
     }
 

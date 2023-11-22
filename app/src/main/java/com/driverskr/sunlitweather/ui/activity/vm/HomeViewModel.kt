@@ -1,16 +1,23 @@
 package com.driverskr.sunlitweather.ui.activity.vm
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.driverskr.lib.net.HttpUtils
+import com.driverskr.sunlitweather.bean.SearchCityResponse
 import com.driverskr.sunlitweather.bean.TempUnit
 import com.driverskr.sunlitweather.bean.VersionBean
 import com.driverskr.sunlitweather.logic.AppRepository
+import com.driverskr.sunlitweather.logic.WeatherRepository
 import com.driverskr.sunlitweather.logic.db.entity.CityEntity
+import com.driverskr.sunlitweather.logic.network.SunlitNetwork
 import com.driverskr.sunlitweather.ui.base.BaseViewModel
 import com.driverskr.sunlitweather.utils.Constant
 import com.driverskr.sunlitweather.utils.ContentUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * @Author: driverSkr
@@ -24,6 +31,8 @@ class HomeViewModel(val app: Application): BaseViewModel(app) {
     val mCurCondCode = MutableLiveData<String>()
 
     val newVersion = MutableLiveData<VersionBean>()
+
+    val searchCity = MutableLiveData<SearchCityResponse?>()
 
     fun setCondCode(condCode: String) {
         mCurCondCode.postValue(condCode)
@@ -63,5 +72,11 @@ class HomeViewModel(val app: Application): BaseViewModel(app) {
         }
     }
 
-
+    fun getSearchCity(location: String,isExact: Boolean) {
+        viewModelScope.launch(Dispatchers.Default){
+            val response = WeatherRepository.getInstance(SunlitNetwork.getInstance()).searchCity(location,if (isExact) "exact" else "fuzzy")
+            Log.d("boge","HomeViewModel : ${response.toString()}")
+            searchCity.postValue(response)
+        }
+    }
 }

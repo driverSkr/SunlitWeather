@@ -30,20 +30,20 @@ public class SpUtil {
         return spUtil;
     }
 
-    public static int getThemeFlag() {
+    public int getThemeFlag() {
         return sp.getInt(THEME_FLAG, 0);
     }
 
-    public static void setThemeFlag(int flag) {
+    public void setThemeFlag(int flag) {
         edit.putInt(THEME_FLAG, flag);
         edit.apply();
     }
 
-    public static String getPluginPath() {
+    public String getPluginPath() {
         return sp.getString(PLUGIN_PATH, "");
     }
 
-    public static void setPluginPath(String path) {
+    public void setPluginPath(String path) {
         edit.putString(PLUGIN_PATH, path);
         edit.apply();
     }

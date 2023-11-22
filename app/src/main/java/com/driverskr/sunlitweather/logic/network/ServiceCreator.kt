@@ -1,5 +1,6 @@
 package com.driverskr.sunlitweather.logic.network
 
+import android.util.Log
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,26 +11,21 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object ServiceCreator {
 
-    //API访问地址
-    private var mBaseUrl: String? = null
-
-    private val retrofit = mBaseUrl?.let {
-        Retrofit.Builder()
-        .baseUrl(it)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    private fun <T> create(serviceClass: Class<T>, apiType: ApiType): T {
+        val baseUrl = getBaseUrl(apiType)
+        Log.d("boge", "ServiceCreator : $baseUrl")
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(serviceClass)
     }
 
-    private fun <T> create(serviceClass: Class<T>): T? = retrofit?.create(serviceClass)
 
+    fun <T : Any> createService(serviceClass: Class<T>, apiType: ApiType) = create(serviceClass, apiType)
 
-    fun <T : Any> createService(serviceClass: Class<T>, apiType: ApiType): T? {
-        getBaseUrl(apiType)
-        return create(serviceClass)
-    }
-
-    private fun getBaseUrl(apiType: ApiType) {
-        mBaseUrl = when (apiType) {
+    private fun getBaseUrl(apiType: ApiType): String {
+        return when (apiType) {
             ApiType.SEARCH -> "https://geoapi.qweather.com"  //和风天气搜索城市
             ApiType.WEATHER -> "https://devapi.qweather.com" //和风天气API
             ApiType.BING -> "https://cn.bing.com"    //必应壁纸

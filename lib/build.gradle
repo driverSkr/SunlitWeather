@@ -63,7 +63,7 @@ dependencies {
     api "androidx.room:room-runtime:2.3.0"
     api "androidx.room:room-ktx:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
-    implementation "androidx.lifecycle:lifecycle-service:2.3.1"
+    api "androidx.lifecycle:lifecycle-service:2.3.1"
 
     implementation 'com.google.code.gson:gson:2.8.9' // 或者你可以选择最新的版本
     implementation("com.squareup.okhttp3:logging-interceptor:3.12.13")

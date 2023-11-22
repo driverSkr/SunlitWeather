@@ -37,6 +37,10 @@ private fun showToast(context: Context, content: String) {
     Toast.makeText(context, content, Toast.LENGTH_LONG).show()
 }
 
+inline fun <reified T : Activity> Activity.startActivity() {
+    startActivity(Intent(this, T::class.java))
+}
+
 inline fun <reified T: Activity> Activity.startActivity(pair: Pair<String, Int>) {
     val intent = Intent(this, T::class.java)
     intent.putExtra(pair.first, pair.second)

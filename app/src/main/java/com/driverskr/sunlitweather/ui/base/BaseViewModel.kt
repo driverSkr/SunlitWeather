@@ -74,7 +74,7 @@ open class BaseViewModel(app: Application): AndroidViewModel(app) {
                 if (loadingType == 0) {
                     loadState.value = LoadState.Error(error)
                     if (runningCount.get() > 0) {
-                        runningCount.getAndIncrement()
+                        runningCount.set(0)
                     }
                     Log.d("BaseViewModel","runningCount - : $runningCount")
                     loadState.value = LoadState.Finish
@@ -82,7 +82,7 @@ open class BaseViewModel(app: Application): AndroidViewModel(app) {
             } finally {
                 if (loadingType == 0) {
                     if (runningCount.get() > 0) {
-                        runningCount.getAndIncrement()
+                        runningCount.set(0)
                     }
                     loadState.value = LoadState.Finish
                 }

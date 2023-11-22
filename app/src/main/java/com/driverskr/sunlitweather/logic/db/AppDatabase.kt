@@ -7,6 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.driverskr.lib.utils.LogUtil
 import com.driverskr.sunlitweather.logic.db.dao.CacheDao
 import com.driverskr.sunlitweather.logic.db.dao.CityDao
 import com.driverskr.sunlitweather.logic.db.entity.CacheEntity
@@ -25,7 +26,7 @@ internal abstract class AppDatabase: RoomDatabase() {
     abstract fun cityDao(): CityDao
 
     companion object {
-        private const val DATABASE_NAME = "sunlit-weather.db"
+        val DATABASE_NAME = "sunlit-weather.db"
 
         @Volatile
         private var instance: AppDatabase? = null
@@ -42,7 +43,7 @@ internal abstract class AppDatabase: RoomDatabase() {
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        Log.e("AppDatabase","db: onCreate")
+                        LogUtil.e("db：onCreate")
                     }
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)

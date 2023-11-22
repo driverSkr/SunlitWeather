@@ -8,37 +8,51 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.location.LocationManager
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.baidu.location.BDLocation
 import com.driverskr.lib.EffectUtil
 import com.driverskr.lib.extension.expand
+import com.driverskr.lib.extension.startActivity
+import com.driverskr.lib.net.LoadState
 import com.driverskr.lib.utils.IconUtils
+import com.driverskr.lib.utils.LogUtil
 import com.driverskr.lib.utils.SpUtil
+import com.driverskr.lib.utils.permission.PermissionUtil
 import com.driverskr.sunlitweather.R
 import com.driverskr.sunlitweather.adapter.ViewPagerAdapter
 import com.driverskr.sunlitweather.bean.TempUnit
 import com.driverskr.sunlitweather.databinding.ActivityHomeBinding
 import com.driverskr.sunlitweather.databinding.NavHeaderMainBinding
+import com.driverskr.sunlitweather.dialog.ChangeCityDialog
+import com.driverskr.sunlitweather.dialog.UpgradeDialog
 import com.driverskr.sunlitweather.location.LocationCallback
 import com.driverskr.sunlitweather.location.SunlitLocation
+import com.driverskr.sunlitweather.logic.AppRepository
 import com.driverskr.sunlitweather.logic.db.entity.CityEntity
 import com.driverskr.sunlitweather.ui.activity.vm.HomeViewModel
+import com.driverskr.sunlitweather.ui.activity.vm.LAST_LOCATION
 import com.driverskr.sunlitweather.ui.activity.vm.LoginViewModel
+import com.driverskr.sunlitweather.ui.activity.vm.SearchViewModel
 import com.driverskr.sunlitweather.ui.base.BaseVmActivity
 import com.driverskr.sunlitweather.ui.fragment.WeatherFragment
 import com.driverskr.sunlitweather.utils.ContentUtil
 import com.driverskr.sunlitweather.utils.DisplayUtil
-import com.driverskr.sunlitweather.utils.TencentUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), LocationCallback {
 
@@ -52,9 +66,11 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
     private val fragments: MutableList<Fragment> by lazy { ArrayList() }
     private val cityList = ArrayList<CityEntity>()
     private var mCurIndex = 0
-    //private val loginViewModel: LoginViewModel by viewModels()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var navHeaderBinding: NavHeaderMainBinding
+
+    private var locationViewModel: SearchViewModel? = null
     /**
      * 初始化定位
      */
@@ -71,9 +87,14 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
         val district = bdLocation.district //获取区县
 
         mBinding.tvLocation.text = district
+        viewModel.getSearchCity(district,true)
+
+        locationViewModel?.curLocation?.value = district
+        locationViewModel?.loadState?.value = LoadState.Finish
     }
 
     private fun startLocation() {
+        locationViewModel?.loadState?.postValue(LoadState.Start("正在获取位置..."))
         sunlitLocation.startLocation()
     }
 
@@ -114,6 +135,10 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
      */
     override fun prepareData(intent: Intent?) {
         registerIntent()
+
+        viewModel.searchCity.observe(this) {
+            Log.d("boge",it.toString())
+        }
     }
 
     /**
@@ -170,11 +195,11 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
     }
 
     /*private fun initUserInfo() {
-        val account = SpUtil.getAccount(this)
+        val account = SpUtil.getAccount()
         if (account.isNotEmpty()) {
             navHeaderBinding.tvAccount.text = account
             navHeaderBinding.ivAvatar.load(
-                SpUtil.getAvatar(this), imageLoader = context.imageLoader
+                SpUtil.getAvatar(), imageLoader = context.imageLoader
             ) {
                 placeholder(R.drawable.ic_avatar_default)
                 transformations(CircleCropTransformation())
@@ -195,7 +220,7 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
             }
         }
         mBinding.ivAddCity.setOnClickListener {
-            Toast.makeText(this,"添加城市",Toast.LENGTH_SHORT).show()
+            startActivity<AddCityActivity>()
         }
         mBinding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -203,7 +228,7 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
                     Toast.makeText(this,"启动城市管理活动",Toast.LENGTH_SHORT).show()
                 }
                 R.id.navTheme -> {
-                    Toast.makeText(this,"启动主题活动",Toast.LENGTH_SHORT).show()
+                    startActivity<ThemeActivity>()
                 }
                 R.id.navShe -> {
                     Toast.makeText(this,"使用摄氏度",Toast.LENGTH_SHORT).show()
@@ -215,14 +240,29 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
                     Toast.makeText(this,"启动反馈活动",Toast.LENGTH_SHORT).show()
                 }
                 R.id.navAbout -> {
-                    Toast.makeText(this,"启动关于活动",Toast.LENGTH_SHORT).show()
+                    startActivity<AboutActivity>()
                 }
             }
             true
         }
 
+        viewModel.mCities.observe(this) {
+            if (it.isEmpty()) {
+                startActivity<AddCityActivity>()
+            } else {
+                cityList.clear()
+                cityList.addAll(it)
+                showCity()
+            }
+        }
+
+        viewModel.newVersion.observe(this) {
+            UpgradeDialog(it).show(supportFragmentManager, "upgrade_dialog")
+        }
+
         viewModel.mCurCondCode.observe(this, ::changeBg)
 
+        getLocation()
     }
 
     private fun changeUnit(unit: TempUnit) {
@@ -235,6 +275,7 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
      */
     override fun initData() {
         viewModel.getCities()
+        viewModel.checkVersion()
     }
 
     /**
@@ -325,6 +366,74 @@ class HomeActivity : BaseVmActivity<ActivityHomeBinding, HomeViewModel>(), Locat
         // 获取特效
         val effectDrawable = EffectUtil.getEffect(context, condCode.toInt())
         mBinding.ivEffect.setImageDrawable(effectDrawable)
+    }
+
+    /**
+     * 获取当前城市
+     */
+    fun getLocation() {
+        if (checkGPSAndPermission()) {
+            locationViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+            locationViewModel?.curLocation?.observe(this) {
+                if (!it.isNullOrEmpty()) {
+                    judgeLocation(it)
+                }
+            }
+            // 根据定位城市获取详细信息
+            locationViewModel?.curCity?.observe(this) { item ->
+                val curCity = AddCityActivity.location2CityBean(item)
+                locationViewModel?.addCity(curCity, true, true)
+            }
+            locationViewModel?.addFinish?.observe(this) {
+                viewModel.getCities()
+                ContentUtil.CITY_CHANGE = false
+            }
+        }
+    }
+
+    /**
+     * 判断城市变化
+     */
+    fun judgeLocation(cityName: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val cacheLocation = AppRepository.getInstance().getCache<String>(LAST_LOCATION)
+            LogUtil.e("location: $cityName")
+            LogUtil.e("cacheLocation: $cacheLocation")
+            withContext(Dispatchers.Main) {
+                if (cityName != cacheLocation) {
+                    ChangeCityDialog(this@HomeActivity).apply {
+                        setContent("检测到当前城市为${cityName}，是否切换到该城市")
+                        setOnConfirmListener {
+                            locationViewModel?.getCityInfo(cityName, true)
+                        }
+                        show()
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 检查GPS状态及GPS权限
+     */
+    fun checkGPSAndPermission(): Boolean {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val pr1 = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        val pr2 = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        if ((pr1 || pr2)) {
+            val pm1 = PermissionUtil.hasPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            val pm2 = PermissionUtil.hasPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            return (pm1 || pm2)
+        }
+        return false
+    }
+
+    override fun onBackPressed() {
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.END)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onDestroy() {
