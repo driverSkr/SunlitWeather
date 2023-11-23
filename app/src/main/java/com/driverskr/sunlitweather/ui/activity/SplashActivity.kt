@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-    lateinit var animate: ViewPropertyAnimator
+    private lateinit var animate: ViewPropertyAnimator
 
     @SuppressLint("ObsoleteSdkInt")
     private fun startIntent() {
@@ -28,7 +28,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             var citySize: Int
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(Intent(this@SplashActivity, WidgetService::class.java))
+                //startForegroundService(Intent(this@SplashActivity, WidgetService::class.java))
             } else {
                 startService(Intent(this@SplashActivity, WidgetService::class.java))
             }

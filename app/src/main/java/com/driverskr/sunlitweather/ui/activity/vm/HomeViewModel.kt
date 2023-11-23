@@ -75,7 +75,7 @@ class HomeViewModel(val app: Application): BaseViewModel(app) {
     fun getSearchCity(location: String,isExact: Boolean) {
         viewModelScope.launch(Dispatchers.Default){
             val response = WeatherRepository.getInstance(SunlitNetwork.getInstance()).searchCity(location,if (isExact) "exact" else "fuzzy")
-            Log.d("boge","HomeViewModel : ${response.toString()}")
+            Log.d("driverSkr","HomeViewModel : $response")
             searchCity.postValue(response)
         }
     }

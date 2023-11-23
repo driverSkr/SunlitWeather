@@ -239,8 +239,8 @@ class WeatherFragment: BaseVmFragment<FragmentWeatherBinding, WeatherViewModel>(
         var min = forecastBase.tempMin.toInt()
         var max = forecastBase.tempMax.toInt()
         mForecastList.forEach {
-            min = Math.min(it.tempMin.toInt(), min)
-            max = Math.max(it.tempMax.toInt(), max)
+            min = it.tempMin.toInt().coerceAtMost(min)
+            max = it.tempMax.toInt().coerceAtLeast(max)
         }
 
         mForecastAdapter15d?.setRange(min, max)
@@ -328,8 +328,8 @@ class WeatherFragment: BaseVmFragment<FragmentWeatherBinding, WeatherViewModel>(
         var maxTmp = minTmp
         for (i in data.indices) {
             val tmp = data[i].temp.toInt()
-            minTmp = Math.min(tmp, minTmp)
-            maxTmp = Math.max(tmp, maxTmp)
+            minTmp = tmp.coerceAtMost(minTmp)
+            maxTmp = tmp.coerceAtLeast(maxTmp)
         }
         // 设置当天的最高最低温度
         forecastHourlyBinding.hourly.setHighestTemp(maxTmp)

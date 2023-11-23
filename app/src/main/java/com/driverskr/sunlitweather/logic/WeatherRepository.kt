@@ -14,7 +14,7 @@ class WeatherRepository private constructor(private val sunlitNetwork: SunlitNet
 
     suspend fun searchCity(location: String, mode: String) = withContext(Dispatchers.IO) {
         val response = sunlitNetwork.fetchSearchCity(location, mode)
-        Log.d("boge","WeatherRepository : ${response.toString()}")
+        Log.d("driverSkr","WeatherRepository : ${response.toString()}")
         response
     }
 

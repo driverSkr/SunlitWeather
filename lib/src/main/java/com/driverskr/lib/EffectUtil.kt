@@ -11,8 +11,7 @@ class EffectUtil {
     companion object {
         fun getEffect(context: Context, code: Int): Drawable? {
             val isDay = DateUtil.getNowHour() in 7 until 18
-            val type = WeatherUtil.convert(code)
-            return when (type) {
+            return when (WeatherUtil.convert(code)) {
                 1 -> {
                     if (isDay)
                         EffectSunDrawable(context.resources.getDrawable(R.drawable.sun_icon))

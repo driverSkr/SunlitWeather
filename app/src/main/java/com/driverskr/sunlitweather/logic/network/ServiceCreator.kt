@@ -13,7 +13,7 @@ object ServiceCreator {
 
     private fun <T> create(serviceClass: Class<T>, apiType: ApiType): T {
         val baseUrl = getBaseUrl(apiType)
-        Log.d("boge", "ServiceCreator : $baseUrl")
+        Log.d("driverSkr", "ServiceCreator : $baseUrl")
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

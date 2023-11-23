@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.driverskr.sunlitweather.databinding.ItemTopCityBinding
 
-class TopCityAdapter(val mData: List<String>, val onChecked: (String) -> Unit) :
+class TopCityAdapter(private val mData: List<String>, val onChecked: (String) -> Unit) :
     RecyclerView.Adapter<TopCityAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(

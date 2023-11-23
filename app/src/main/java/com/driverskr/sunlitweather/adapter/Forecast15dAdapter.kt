@@ -9,7 +9,7 @@ import com.driverskr.sunlitweather.bean.Daily
 import com.driverskr.sunlitweather.databinding.ItemForecast15Binding
 import java.util.*
 
-class Forecast15dAdapter(val context: Context, val datas: List<Daily>) :
+class Forecast15dAdapter(val context: Context, private val datas: List<Daily>) :
     RecyclerView.Adapter<Forecast15dAdapter.ViewHolder>() {
 
     private var mMin = 0
@@ -46,11 +46,11 @@ class Forecast15dAdapter(val context: Context, val datas: List<Daily>) :
         }
     }
 
-    val weeks = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
+    private val weeks = arrayOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
 
     private fun getWeekDay(position: Int): String {
-        if (position == 0) {
-            return "今天"
+        return if (position == 0) {
+            "今天"
         } else {
             val calendar = Calendar.getInstance()
             val dateArray = datas[position].fxDate.split("-")
@@ -59,7 +59,7 @@ class Forecast15dAdapter(val context: Context, val datas: List<Daily>) :
             if (w < 0) {
                 w = 0
             }
-            return weeks[w]
+            weeks[w]
         }
     }
 

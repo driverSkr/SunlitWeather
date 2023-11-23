@@ -76,9 +76,9 @@
                     android:visibility="gone"
                     app:drawableLeftCompat="@drawable/icon_loc"
                     app:drawableTint="@color/colorPrimary"
+                    app:use_plugin_skin="true"
+                    app:use_plugin_skin_attr="drawableLeftCompat"
                     tools:text="上海市" />
-                <!--app:use_plugin_skin="true"
-                    app:use_plugin_skin_attr="drawableLeftCompat"-->
 
                 <TextView
                     android:id="@+id/tvGetPos"

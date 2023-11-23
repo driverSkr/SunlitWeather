@@ -82,6 +82,9 @@ dependencies {
 
     implementation files('libs/open_sdk_3.5.11.6_r13b47b7_lite.jar')
 
+    implementation 'com.google.dagger:hilt-android:2.36'
+    kapt 'com.google.dagger:hilt-compiler:2.36'
+
     /*依赖子模块*/
     implementation project(path: ':lib')
     implementation project(path: ':plugin-lib')
@@ -89,6 +92,10 @@ dependencies {
     /*Retrofit2*/
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Coil图片加载库
+    implementation("io.coil-kt:coil:1.1.1")
+
 
     api "androidx.room:room-runtime:2.3.0"
     api "androidx.room:room-ktx:2.3.0"

@@ -38,8 +38,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.driverskr.sunlitweather.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.UserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.FeedBackActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.CityManagerActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".ui.activity.ThemeActivity"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.driverskr.sunlitweather.THEME_SETTING" />
 
@@ -50,6 +73,28 @@
             android:name=".ui.activity.AddCityActivity"
             android:launchMode="singleTask"
             android:theme="@style/Left2Right" />
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent101991873" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".ui.activity.HomeActivity"
             android:launchMode="singleTask" />
@@ -102,6 +147,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <receiver
+            android:name=".receiver.BootCompleteReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import java.io.File
 
 class ThemeActivity: BaseVmActivity<ActivityThemeBinding, ThemeViewModel>() {
 
-    var curFlag = 0
+    private var curFlag = 0
 
     override fun bindView() = ActivityThemeBinding.inflate(layoutInflater)
 

@@ -34,9 +34,9 @@ class ThemeViewModel(private val app: Application): BaseViewModel(app) {
         }
         val file = File(dir, destFileName)
         launch {
-            flow<Int> {
+            flow {
                 val request = Request.Builder().url(path).build()
-                OkHttpUtils.getClient().newCall(request).execute().use {
+                OkHttpUtils.getClient().newCall(request).execute().use { it ->
                     val buf = ByteArray(1024)
                     var len = 0
 

@@ -48,20 +48,20 @@ public class SpUtil {
         edit.apply();
     }
 
-    public static String getAccount() {
+    public String getAccount() {
         return sp.getString(ACCOUNT_NAME, "");
     }
 
-    public static void setAccount(String name) {
+    public void setAccount(String name) {
         edit.putString(ACCOUNT_NAME, name);
         edit.apply();
     }
 
-    public static String getAvatar() {
+    public String getAvatar() {
         return sp.getString(ACCOUNT_AVATAR, "");
     }
 
-    public static void setAvatar(String url) {
+    public void setAvatar(String url) {
         edit.putString(ACCOUNT_AVATAR, url);
         edit.apply();
     }
@@ -70,12 +70,12 @@ public class SpUtil {
         return sp.getString(TOKEN, "");
     }
 
-    public static void setToken(String token) {
+    public void setToken(String token) {
         edit.putString(TOKEN, token);
         edit.apply();
     }
 
-    public static void logout() {
+    public void logout() {
         setAvatar("");
         setAccount("");
         setToken( "");

@@ -88,7 +88,7 @@ class WidgetService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    val callback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private val callback = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
@@ -104,7 +104,7 @@ class WidgetService : LifecycleService() {
         }
     }
 
-    val netWorkStateReceiver = object : BroadcastReceiver() {
+    private val netWorkStateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val activeNetworkInfo = connManager.activeNetworkInfo
             if (activeNetworkInfo != null && activeNetworkInfo.isAvailable) {
@@ -210,7 +210,7 @@ class WidgetService : LifecycleService() {
         initEvent(views)
 
         val componentName = ComponentName(this, WeatherWidget::class.java)
-        AppWidgetManager.getInstance(this).updateAppWidget(componentName, views);
+        AppWidgetManager.getInstance(this).updateAppWidget(componentName, views)
     }
 
     /**

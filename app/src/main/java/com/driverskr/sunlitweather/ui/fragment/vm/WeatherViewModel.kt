@@ -32,7 +32,7 @@ class WeatherViewModel(val app: Application) : BaseViewModel(app) {
 
     fun loadCache(cityId: String) {
         launchSilent {
-            var cache = AppRepository.getInstance().getCache<Now>(CACHE_WEATHER_NOW + cityId)
+            val cache = AppRepository.getInstance().getCache<Now>(CACHE_WEATHER_NOW + cityId)
             cache?.let {
                 weatherNow.postValue(it)
             }
@@ -95,7 +95,7 @@ class WeatherViewModel(val app: Application) : BaseViewModel(app) {
         // 天气生活指数(使用缓存 3h)
         launch {
             val lifeIndicatorCacheKey = CACHE_LIFE_INDICATOR + cityId
-            var cache = AppRepository.getInstance().getCache<LifeIndicator>(lifeIndicatorCacheKey)
+            val cache = AppRepository.getInstance().getCache<LifeIndicator>(lifeIndicatorCacheKey)
             cache?.let {
                 lifeIndicator.postValue(it)
                 return@launch

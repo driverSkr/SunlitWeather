@@ -10,7 +10,7 @@ import com.tencent.tauth.Tencent
  * @Description: $
  */
 object TencentUtil {
-    val sTencent by lazy {
+    val sTencent: Tencent by lazy {
         Tencent.createInstance(
             ContentUtil.TC_APP_ID,
             BaseApplication.context,

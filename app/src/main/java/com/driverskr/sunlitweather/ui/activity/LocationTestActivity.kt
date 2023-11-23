@@ -16,7 +16,7 @@ import com.driverskr.sunlitweather.location.SunlitLocation
  */
 class LocationTestActivity : AppCompatActivity(), LocationCallback {
 
-    lateinit var binding: ActivityLocationTestBinding
+    private lateinit var binding: ActivityLocationTestBinding
     //权限数组
     private val permissions = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     //请求权限意图
@@ -66,7 +66,7 @@ class LocationTestActivity : AppCompatActivity(), LocationCallback {
             val writeStorage = true == it[Manifest.permission.WRITE_EXTERNAL_STORAGE]
             if (fineLocation && writeStorage) {
                 //权限已经获取到，开始定位
-                startLocation();
+                startLocation()
             }
         }
     }
@@ -76,10 +76,10 @@ class LocationTestActivity : AppCompatActivity(), LocationCallback {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
             checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             //开始权限请求
-            requestPermissionIntent.launch(permissions);
+            requestPermissionIntent.launch(permissions)
             return
         }
         //开始定位
-        startLocation();
+        startLocation()
     }
 }

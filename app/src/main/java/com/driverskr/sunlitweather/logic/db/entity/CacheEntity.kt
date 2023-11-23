@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "cache")
-class CacheEntity() {
+class CacheEntity {
 
     @PrimaryKey(autoGenerate = false)
     @NonNull
