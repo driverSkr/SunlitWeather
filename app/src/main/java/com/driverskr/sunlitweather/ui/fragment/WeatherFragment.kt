@@ -29,7 +29,7 @@ import com.driverskr.sunlitweather.ui.base.BaseVmFragment
 import com.driverskr.sunlitweather.ui.fragment.vm.WeatherViewModel
 import com.driverskr.sunlitweather.utils.ContentUtil
 import com.driverskr.sunlitweather.utils.Lunar
-import me.wsj.lib.utils.DateUtil
+import com.driverskr.lib.utils.DateUtil
 import java.util.*
 
 /**

@@ -6,7 +6,7 @@ import android.util.Log
 import com.driverskr.lib.R
 import com.driverskr.lib.plugin.PluginUtil
 import com.driverskr.lib.utils.WeatherUtil.convert
-import me.wsj.lib.utils.DateUtil.getNowHour
+import com.driverskr.lib.utils.DateUtil.getNowHour
 
 /**
  * @Author: driverSkr

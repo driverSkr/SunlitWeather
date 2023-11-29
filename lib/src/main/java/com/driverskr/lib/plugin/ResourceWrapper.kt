@@ -1,4 +1,4 @@
-package me.wsj.lib.plugin
+package com.driverskr.lib.plugin
 
 import android.content.res.Resources
 

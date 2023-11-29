@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import com.driverskr.lib.specialeffects.*
 import com.driverskr.lib.utils.WeatherUtil
-import me.wsj.lib.utils.DateUtil
+import com.driverskr.lib.utils.DateUtil
 
 class EffectUtil {
 

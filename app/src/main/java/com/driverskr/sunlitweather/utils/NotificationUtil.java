@@ -19,7 +19,7 @@ import com.driverskr.sunlitweather.R;
 import com.driverskr.sunlitweather.bean.Now;
 import com.driverskr.sunlitweather.ui.activity.SplashActivity;
 
-import me.wsj.lib.utils.DateUtil;
+import com.driverskr.lib.utils.DateUtil;
 
 
 public class NotificationUtil {

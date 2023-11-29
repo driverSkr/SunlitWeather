@@ -182,6 +182,7 @@ class AddCityActivity: BaseVmActivity<ActivityAddCityBinding, SearchViewModel>()
                         showLoading(false)
                     }
                 }
+                else -> {}
             }
         }
 
