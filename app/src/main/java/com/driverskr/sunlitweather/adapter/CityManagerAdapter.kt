@@ -11,8 +11,7 @@ import java.util.*
 class CityManagerAdapter(
     private val mData: List<CityEntity>,
     var onSort: ((List<CityEntity>) -> Unit)? = null
-) :
-    RecyclerView.Adapter<CityManagerAdapter.ViewHolder>(), IDragSort {
+) : RecyclerView.Adapter<CityManagerAdapter.ViewHolder>(), IDragSort {
 
     var listener: OnCityRemoveListener? = null
 

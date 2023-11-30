@@ -55,9 +55,7 @@ public class NotificationUtil {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_weather_notify);
         builder.setCustomContentView(views);
 
-        Notification notification = builder.build();
-
-        return notification;
+        return builder.build();
     }
 
     public static void updateNotification(Context context, int notifyId, String cityName, Now now) {

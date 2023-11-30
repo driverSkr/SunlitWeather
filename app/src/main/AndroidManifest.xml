@@ -111,7 +111,9 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
-        </activity> <!-- 添加定位AK -->
+        </activity>
+
+        <!-- 添加定位AK -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="UaiNeMs9vjFPbSXKeL7ojGVM0HM3pB9m" /> <!-- 添加定位服务 -->

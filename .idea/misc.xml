@@ -42,14 +42,14 @@
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_add_city.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_base.xml" value="0.2" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_city_manager.xml" value="0.1" />
-        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_feed_back.xml" value="0.264" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_feed_back.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_location_test.xml" value="0.225" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_settings.xml" value="0.22135416666666666" />
-        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_splash.xml" value="0.4" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_theme.xml" value="0.1" />
-        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_user_info.xml" value="0.2046875" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/activity_user_info.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/dialog_alarm.xml" value="0.2" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/dialog_change_city.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/dialog_upgrade.xml" value="0.1" />
@@ -57,7 +57,7 @@
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_city_manager.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_forecast.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_forecast15.xml" value="0.264" />
-        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_searching.xml" value="0.2" />
+        <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_searching.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_top_city.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/item_warning.xml" value="0.1" />
         <entry key="..\:/androidProject/boGeStudyDemo/SunlitWeather/app/src/main/res/layout/layout_air_quality.xml" value="0.2" />
